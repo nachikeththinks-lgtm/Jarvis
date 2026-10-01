@@ -140,25 +140,29 @@ function respond( text){
   let expression = text.substring(10).toLowerCase().trim();
 
   // Square root
-  if (expression.startsWith("the square root of ")) {
-    const number = parseFloat(
-      expression.replace("the square root of ", "")
-    );
+if (
+  expression.startsWith("the square root of ") ||
+  expression.startsWith("square root of ") ||
+  expression.startsWith("square root ") ||
+  expression.endsWith(" square root")
+) {
 
-    if (!isNaN(number) && number >= 0) {
-      return "The answer is " + Math.sqrt(number) + ", sir.";
-    }
+  let numberText = expression
+    .replace("the square root of ", "")
+    .replace("square root of ", "")
+    .replace("square root ", "")
+    .replace(" square root", "")
+    .trim();
 
-    return "I couldn't calculate that, sir.";
+  const number = parseFloat(numberText);
+
+  if (!isNaN(number) && number >= 0) {
+    return "The answer is " + Math.sqrt(number) + ", sir.";
   }
-    if (expression.startsWith("square root of ") || expression.endsWith(" square root")) {
 
-    if (!isNaN(number) && number >= 0) {
-      return "The answer is " + Math.sqrt(number) + ", sir.";
-    }
-
-    return "I couldn't calculate that, sir.";
-  }
+  return "I couldn't calculate that, sir.";
+}
+  
 
   // Powers
   expression = expression
@@ -184,7 +188,7 @@ function respond( text){
 
   // Only allow numbers and basic math symbols
   if (!/^[0-9+\-*/^().\s]+$/.test(expression)) {
-    return "I couldn't calculate that, sir.";
+    return "I couldnt calculate that, sir.";
   }
 
   try {
