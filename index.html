@@ -22,11 +22,26 @@
       justify-content: center;
     }
 
-    h1 {
-      font-size: 48px;
-      letter-spacing: 8px;
-      margin-bottom: 10px;
-    }
+    .hud-title {
+  font-size: 48px;
+  letter-spacing: 12px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px #00d9ff, 0 0 25px #007a99;
+  animation: titleGlow 2s infinite alternate;
+}
+
+.hud-title span {
+  font-size: 60px;
+}
+
+@keyframes titleGlow {
+  from {
+    opacity: 0.75;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
     #status {
       color: #8defff;
@@ -89,26 +104,8 @@
       font-size: 18px;
       min-height: 50px;
     }
-  .hud-title {
-  font-size: 48px;
-  letter-spacing: 12px;
-  margin-bottom: 10px;
-  text-shadow: 0 0 10px #00d9ff, 0 0 25px #007a99;
-  animation: titleGlow 2s infinite alternate;
-}
-
-.hud-title span {
-  font-size: 60px;
-}
-
-@keyframes titleGlow {
-  from {
-    opacity: 0.75;
-  }
-  to {
-    opacity: 1;
-  }
-}
+<style>
+    
 </head>
 
 <body>
