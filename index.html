@@ -115,11 +115,12 @@ function speak(text) {
   const voices = speechSynthesis.getVoices();
 
   // Look for a natural English voice
-  const preferredVoice =
-    voices.find(v => v.lang === "en-GB") ||
-    voices.find(v => v.lang.startsWith("en-GB")) ||
-    voices.find(v => v.lang.startsWith("en"));
-
+const preferredVoice =
+  voices.find(v => v.name.toLowerCase().includes("google")) ||
+  voices.find(v => v.lang === "en-GB") ||
+  voices.find(v => v.lang.startsWith("en-GB")) ||
+  voices.find(v => v.lang.startsWith("en"));
+  
   if (preferredVoice) {
     voice.voice = preferredVoice;
   }
