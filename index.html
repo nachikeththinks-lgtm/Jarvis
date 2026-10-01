@@ -133,21 +133,85 @@ function speak(text) {
   speechSynthesis.speak(voice);
 }
 
-function respond(text) {
+function respond( text){
 
-        if (text.toLowerCase().startsWith("calculate ")) {
-    const expression = text.substring(10);
+  if (text.toLowerCase().startsWith("calculate ")) {
 
-    try {
-      const result = Function(
-        '"use strict"; return (' + expression + ')'
-      )();
+  let expression = text.substring(10).toLowerCase().trim();
 
-      return "The answer is " + result + ", sir.";
-    } catch {
-      return "I couldn't calculate that, sir.";
+  // Square root
+  if (expression.startsWith("the square root of ")) {
+    const number = parseFloat(
+      expression.replace("the square root of ", "")
+    );
+
+    if (!isNaN(number) && number >= 0) {
+      return "The answer is " + Math.sqrt(number) + ", sir.";
     }
-        }
+
+    return "I couldn't calculate that, sir.";
+  }
+
+  if (expression.startsWith("square root of ")) {
+    const number = parseFloat(
+      expression.replace("square root of ", "")
+    );
+
+    if (!isNaN(number) && number >= 0) {
+      return "The answer is " + Math.sqrt(number) + ", sir.";
+    }
+
+    return "I couldn't calculate that, sir.";
+  }
+
+  // Powers
+  expression = expression
+    .replace(/to the power of/g, "^")
+    .replace(/raised to the power of/g, "^")
+    .replace(/squared/g, "^2")
+    .replace(/cubed/g, "^3");
+
+  // Basic operations
+  expression = expression
+    .replace(/multiplied by/g, "*")
+    .replace(/times/g, "*")
+    .replace(/divided by/g, "/")
+    .replace(/divide by/g, "/")
+    .replace(/plus/g, "+")
+    .replace(/minus/g, "-");
+
+  // Convert percentages
+  expression = expression.replace(
+    /(\d+(?:\.\d+)?)\s*percent of\s*(\d+(?:\.\d+)?)/g,
+    "($1/100)*$2"
+  );
+
+  // Only allow numbers and basic math symbols
+  if (!/^[0-9+\-*/^().\s]+$/.test(expression)) {
+    return "I couldn't calculate that, sir.";
+  }
+
+  try {
+    // Handle powers
+    expression = expression.replace(
+      /(\d+(?:\.\d+)?)\s*\^\s*(\d+(?:\.\d+)?)/g,
+      "Math.pow($1,$2)"
+    );
+
+    const result = Function(
+      '"use strict"; return (' + expression + ')'
+    )();
+
+    if (typeof result === "number" && isFinite(result)) {
+      return "The answer is " + result + ", sir.";
+    }
+
+    return "I couldn't calculate that, sir.";
+
+  } catch {
+    return "I couldn't calculate that, sir.";
+  }
+  }
   
   if (text.toLowerCase().startsWith("search youtube for ")) {
     const query = text.substring(19);
