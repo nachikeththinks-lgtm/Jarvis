@@ -252,6 +252,40 @@ if (
 
   return "You haven't told me your name yet, sir.";
 }
+
+  // General JARVIS memory
+if (text.toLowerCase().startsWith("remember that ")) {
+  const memory = text.substring(14).trim();
+
+  if (memory) {
+    const memories = JSON.parse(
+      localStorage.getItem("jarvis_memories") || "[]"
+    );
+
+    memories.push(memory);
+    localStorage.setItem(
+      "jarvis_memories",
+      JSON.stringify(memories)
+    );
+
+    return "I'll remember that, sir.";
+  }
+}
+
+if (
+  text.toLowerCase().startsWith("what do you remember") ||
+  text.toLowerCase().startsWith("what do you know about me")
+) {
+  const memories = JSON.parse(
+    localStorage.getItem("jarvis_memories") || "[]"
+  );
+
+  if (memories.length === 0) {
+    return "I don't have any general memories stored yet, sir.";
+  }
+
+  return "I remember: " + memories.join(". ") + ".";
+}
   
   text = text.toLowerCase();
 
