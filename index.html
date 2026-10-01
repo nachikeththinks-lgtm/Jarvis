@@ -307,6 +307,13 @@ if (text.includes("good night")) {
 ) {
   return "I can calculate, search Google and YouTube, remember information you give me, and respond to voice commands, sir.";
                 }
+
+  if (
+  text.includes("are you there") ||
+  text.includes("are you online")
+) {
+  return "Always, sir. All systems are online.";
+  }
   
   if (text.includes("hello") || text.includes("hi")) {
     return "Good day, sir. JARVIS online and ready.";
