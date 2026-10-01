@@ -139,7 +139,7 @@ function respond( text){
 
   let expression = text.substring(10).toLowerCase().trim();
 
-    expression = expression.replace(/√/g, "square root ");
+    expression = expression.replace(/√\s*(\d+(?:\.\d+)?)/g, "square root of $1");
     
   // Square root
 if (
