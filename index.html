@@ -121,6 +121,15 @@ function speak(text) {
 
 function respond(text) {
 
+    if (text.toLowerCase().startsWith("search google for ")) {
+    const query = text.substring(18);
+    window.open(
+      "https://www.google.com/search?q=" + encodeURIComponent(query),
+      "_blank"
+    );
+    return "Searching Google for " + query + ", sir.";
+    }
+  
   text = text.toLowerCase();
 
   if (text.includes("hello") || text.includes("hi")) {
