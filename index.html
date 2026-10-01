@@ -151,11 +151,7 @@ function respond( text){
 
     return "I couldn't calculate that, sir.";
   }
-
-  if (expression.startsWith("square root of ")) {
-    const number = parseFloat(
-      expression.replace("square root of ", "")
-    );
+    if (expression.startsWith("square root of ") || expression.endsWith(" square root")) {
 
     if (!isNaN(number) && number >= 0) {
       return "The answer is " + Math.sqrt(number) + ", sir.";
