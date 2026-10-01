@@ -224,6 +224,16 @@ if (
     );
     return "Searching YouTube for " + query + ", sir.";
       }
+  if (text.toLowerCase().startsWith("search spotify for ")) {
+  const query = text.substring(19).trim();
+
+  window.open(
+    "https://open.spotify.com/search/" + encodeURIComponent(query),
+    "_blank"
+  );
+
+  return "Searching Spotify for " + query + ", sir.";
+  }
   
   if (text.toLowerCase().startsWith("search google for ")) {
     const query = text.substring(18);
