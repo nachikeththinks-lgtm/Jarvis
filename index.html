@@ -224,6 +224,24 @@ if (
     );
     return "Searching YouTube for " + query + ", sir.";
       }
+ 
+  if (
+  text.toLowerCase().startsWith("play ") &&
+  text.toLowerCase().includes(" on spotify")
+) {
+  const command = text.substring(5).trim();
+  const query = command
+    .replace(/ on spotify$/i, "")
+    .trim();
+
+  window.open(
+    "https://open.spotify.com/search/" + encodeURIComponent(query),
+    "_blank"
+  );
+
+  return "Searching Spotify for " + query + ", sir.";
+  }
+  
   if (text.toLowerCase().startsWith("search spotify for ")) {
   const query = text.substring(19).trim();
 
