@@ -289,6 +289,18 @@ if (
   
   text = text.toLowerCase();
 
+  if (text.includes("good morning")) {
+  return "Good morning, sir. Systems are online and ready.";
+}
+
+if (text.includes("good evening")) {
+  return "Good evening, sir. How may I assist you?";
+}
+
+if (text.includes("good night")) {
+  return "Good night, sir. I'll be here when you need me.";
+}
+
   if (text.includes("hello") || text.includes("hi")) {
     return "Good day, sir. JARVIS online and ready.";
   }
