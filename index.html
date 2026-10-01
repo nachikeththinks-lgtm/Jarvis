@@ -135,7 +135,21 @@ function speak(text) {
 
 function respond(text) {
 
-      if (text.toLowerCase().startsWith("search youtube for ")) {
+        if (text.toLowerCase().startsWith("calculate ")) {
+    const expression = text.substring(10);
+
+    try {
+      const result = Function(
+        '"use strict"; return (' + expression + ')'
+      )();
+
+      return "The answer is " + result + ", sir.";
+    } catch {
+      return "I couldn't calculate that, sir.";
+    }
+        }
+  
+  if (text.toLowerCase().startsWith("search youtube for ")) {
     const query = text.substring(19);
     window.open(
       "https://www.youtube.com/results?search_query=" + encodeURIComponent(query),
