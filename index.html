@@ -314,6 +314,13 @@ if (text.includes("good night")) {
 ) {
   return "Always, sir. All systems are online.";
   }
+
+  if (
+  text.includes("thank you") ||
+  text.includes("thanks")
+) {
+  return "You're most welcome, sir.";
+  }
   
   if (text.includes("hello") || text.includes("hi")) {
     return "Good day, sir. JARVIS online and ready.";
