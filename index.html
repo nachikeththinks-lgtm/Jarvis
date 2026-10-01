@@ -113,7 +113,7 @@ function speak(text) {
   const voice = new SpeechSynthesisUtterance(text);
 
   const voices = speechSynthesis.getVoices();
-  console.log(voices.map(v => v.name + " — " + v.lang));
+  alert(voices.map(v => v.name + " — " + v.lang).join("\n"));
 
   // Look for a natural English voice
 const preferredVoice =
