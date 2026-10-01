@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JARVIS</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #05080d;
+      color: #00d9ff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      font-size: 48px;
+      letter-spacing: 8px;
+      margin-bottom: 10px;
+    }
+
+    #status {
+      color: #8defff;
+      margin-bottom: 35px;
+    }
+
+    #orb {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 3px solid #00d9ff;
+      box-shadow:
+        0 0 20px #00d9ff,
+        0 0 60px #007a99,
+        inset 0 0 30px #007a99;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 35px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 20px #00d9ff;
+      }
+
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 60px #00d9ff;
+      }
+
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px #00d9ff;
+      }
+    }
+
+    button {
+      background: transparent;
+      color: #00d9ff;
+      border: 2px solid #00d9ff;
+      border-radius: 30px;
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #007a99;
+    }
+
+    button:active {
+      background: #003542;
+    }
+
+    #output {
+      margin-top: 30px;
+      max-width: 85%;
+      color: white;
+      font-size: 18px;
+      min-height: 50px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>JARVIS</h1>
+
+  <div id="status">SYSTEM STANDBY</div>
+
+  <div id="orb">J</div>
+
+  <button onclick="listen()">🎙️ ACTIVATE</button>
+
+  <div id="output">
+    Good day, sir. JARVIS online.
+  </div>
+
+<script>
+
+function speak(text) {
+  const voice = new SpeechSynthesisUtterance(text);
+
+  voice.rate = 0.9;
+  voice.pitch = 0.8;
+  voice.volume = 1;
+
+  speechSynthesis.cancel();
+  speechSynthesis.speak(voice);
+}
+
+function respond(text) {
+
+  text = text.toLowerCase();
+
+  if (text.includes("hello") || text.includes("hi")) {
+    return "Good day, sir. JARVIS online and ready.";
+  }
+
+  if (text.includes("who are you")) {
+    return "I am JARVIS, your personal artificial intelligence assistant.";
+  }
+
+  if (text.includes("how are you")) {
+    return "All systems are operating normally, sir.";
+  }
+
+  if (text.includes("time")) {
+    return "The current time is " +
+      new Date().toLocaleTimeString();
+  }
+
+  if (text.includes("thank")) {
+    return "You're most welcome, sir.";
+  }
+
+  return "I heard you say: " + text +
+    ". My advanced AI brain is still being installed.";
+}
+
+function listen() {
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    document.getElementById("output").innerText =
+      "Voice recognition isn't supported in this browser.";
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+
+  recognition.lang = "en-US";
+  recognition.interimResults = false;
+
+  document.getElementById("status").innerText =
+    "LISTENING...";
+
+  recognition.start();
+
+  recognition.onresult = function(event) {
+
+    const text =
+      event.results[0][0].transcript;
+
+    document.getElementById("output").innerText =
+      "You: " + text;
+
+    const answer = respond(text);
+
+    setTimeout(function() {
+
+      document.getElementById("output").innerText =
+        "JARVIS: " + answer;
+
+      speak(answer);
+
+    }, 500);
+
+  };
+
+  recognition.onend = function() {
+
+    document.getElementById("status").innerText =
+      "SYSTEM READY";
+
+  };
+
+}
+
+speak("Good day, sir. JARVIS online.");
+
+</script>
+
+</body>
+  </html>
