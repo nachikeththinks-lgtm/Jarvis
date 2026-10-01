@@ -325,23 +325,31 @@ if (text.includes("good night")) {
   if (
   text.includes("tell me a joke") ||
   text.includes("tell me something funny")
-const jokes = [
-  "Why did the bicycle fall over? Because it was two-tired, sir.",
-  "Why don't eggs tell jokes? They might crack up, sir.",
-  "What do you call a sleeping bull? A bulldozer, sir.",
-  "Why did the banana go to the doctor? Because it wasn't peeling well, sir.",
-  "What do you call a bear with no teeth? A gummy bear, sir.",
-  "Why did the tomato turn red? Because it saw the salad dressing, sir.",
-  "What did one wall say to the other wall? I'll meet you at the corner, sir.",
-  "Why did the math book look sad? Because it had too many problems, sir.",
-  "What do you call a fish wearing a bowtie? Sofishticated, sir.",
-  "Why did the cookie go to the hospital? Because it felt crumby, sir.",
-  "What do you call a cow with no legs? Ground beef, sir.",
-  "Why did the golfer bring two pairs of trousers? In case he got a hole in one, sir.",
-  "What did the ocean say to the beach? Nothing. It just waved, sir.",
-  "Why don't skeletons fight each other? They don't have the guts, sir.",
-  "What kind of tree fits in your hand? A palm tree, sir."
-];
+) {
+
+  const jokes = [
+    "Why did the bicycle fall over? Because it was two-tired, sir.",
+    "Why don't eggs tell jokes? They might crack up, sir.",
+    "What do you call a sleeping bull? A bulldozer, sir.",
+    "Why did the banana go to the doctor? Because it wasn't peeling well, sir.",
+    "What do you call a bear with no teeth? A gummy bear, sir.",
+    "Why did the tomato turn red? Because it saw the salad dressing, sir.",
+    "What did one wall say to the other wall? I'll meet you at the corner, sir.",
+    "Why did the math book look sad? Because it had too many problems, sir.",
+    "What do you call a fish wearing a bowtie? Sofishticated, sir.",
+    "Why did the cookie go to the hospital? Because it felt crumby, sir.",
+    "What do you call a cow with no legs? Ground beef, sir.",
+    "Why did the golfer bring two pairs of trousers? In case he got a hole in one, sir.",
+    "What did the ocean say to the beach? Nothing. It just waved, sir.",
+    "Why don't skeletons fight each other? They don't have the guts, sir.",
+    "What kind of tree fits in your hand? A palm tree, sir."
+  ];
+
+  const randomJoke =
+    jokes[Math.floor(Math.random() * jokes.length)];
+
+  return randomJoke;
+  }
   
   if (text.includes("hello") || text.includes("hi")) {
     return "Good day, sir. JARVIS online and ready.";
