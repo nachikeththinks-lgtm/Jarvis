@@ -232,6 +232,26 @@ if (
     );
     return "Searching Google for " + query + ", sir.";
     }
+
+  // JARVIS memory
+if (text.toLowerCase().startsWith("my name is ")) {
+  const name = text.substring(11).trim();
+  localStorage.setItem("jarvis_name", name);
+  return "I'll remember your name, " + name + ", sir.";
+}
+
+if (
+  text.toLowerCase().includes("what is my name") ||
+  text.toLowerCase().includes("what's my name")
+) {
+  const name = localStorage.getItem("jarvis_name");
+
+  if (name) {
+    return "Your name is " + name + ", sir.";
+  }
+
+  return "You haven't told me your name yet, sir.";
+}
   
   text = text.toLowerCase();
 
