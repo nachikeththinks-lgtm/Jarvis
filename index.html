@@ -140,12 +140,27 @@ function respond(text) {
       new Date().toLocaleTimeString();
   }
 
+  if (text.includes("date")) {
+    return "Today's date is " +
+      new Date().toLocaleDateString();
+  }
+
+  if (text.includes("open google")) {
+    window.open("https://www.google.com", "_blank");
+    return "Opening Google, sir.";
+  }
+
+  if (text.includes("open youtube")) {
+    window.open("https://www.youtube.com", "_blank");
+    return "Opening YouTube, sir.";
+  }
+
   if (text.includes("thank")) {
     return "You're most welcome, sir.";
   }
 
   return "I heard you say: " + text +
-    ". My advanced AI brain is still being installed.";
+    ". I don't have an answer for that command yet, sir.";
 }
 
 function listen() {
