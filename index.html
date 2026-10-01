@@ -139,6 +139,8 @@ function respond( text){
 
   let expression = text.substring(10).toLowerCase().trim();
 
+    expression = expression.replace(/√/g, "square root ");
+    
   // Square root
 if (
   expression.startsWith("the square root of ") ||
